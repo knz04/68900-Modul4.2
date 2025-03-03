@@ -149,6 +149,11 @@ private fun TopicItem(itemTitle: String, selected: Boolean, onToggle: () -> Unit
     val image = painterResource(R.drawable.placeholder_1_1)
     Row(
         modifier = Modifier
+            .toggleable(
+                value = selected,
+                onValueChange = { _ -> onToggle() },
+                role = Role.Checkbox
+            )
             .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Image(
@@ -169,7 +174,7 @@ private fun TopicItem(itemTitle: String, selected: Boolean, onToggle: () -> Unit
         Spacer(Modifier.weight(1f))
         Checkbox(
             checked = selected,
-            onCheckedChange = { onToggle() },
+            onCheckedChange = null,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
     }
