@@ -166,7 +166,7 @@ private fun Paragraph(paragraph: Paragraph) {
         MaterialTheme.colorScheme.codeBlockBackground
     )
     Box(modifier = Modifier.padding(bottom = trailingPadding)) {
-        when (paragraph.type) {
+        when (paragraph.type) {n mi
             ParagraphType.Bullet -> BulletParagraph(
                 text = annotatedString,
                 textStyle = textStyle,
