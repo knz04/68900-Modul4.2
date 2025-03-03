@@ -86,23 +86,21 @@ fun ArticleScreen(
         topBar = {
             InsetAwareTopAppBar(
                 title = {
-                    Text(
-                        text = "Published in: ${post.publication?.name}",
-                        style = MaterialTheme.typography.titleSmall,
-                        color = LocalContentColor.current
-                    )
+                    // ...
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = null
+                            contentDescription = stringResource(
+                                R.string.cd_navigate_up
+                            )
                         )
                     }
                 }
             )
         }
-    ) { innerPadding ->
+    ) {   innerPadding ->
         PostContent(
             post = post,
             modifier = Modifier
