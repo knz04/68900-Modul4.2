@@ -59,14 +59,23 @@ import com.example.jetnews.ui.theme.JetnewsTheme
 @Composable
 fun PostCardHistory(post: Post, navigateToArticle: (String) -> Unit) {
     var openDialog by remember { mutableStateOf(false) }
+    val showFewerLabel = stringResource(R.string.cd_show_fewer)
     Row(
-        Modifier.clickable(
-            // R.string.action_read_article = "read article"
-            onClickLabel = stringResource(R.string.action_read_article)
-        ) {
-            navigateToArticle(post.id)
-        }
-    ) {
+        Modifier
+            .clickable(
+                onClickLabel = stringResource(R.string.action_read_article)
+            ) {
+                navigateToArticle(post.id)
+            }
+            .semantics {
+                customActions = listOf(
+                    CustomAccessibilityAction(
+                        label = showFewerLabel,
+                        // action returns boolean to indicate success
+                        action = { openDialog = true; true }
+                    )
+                )
+            }
     ) {
         Image(
             painter = painterResource(post.imageThumbId),
@@ -97,10 +106,13 @@ fun PostCardHistory(post: Post, navigateToArticle: (String) -> Unit) {
             }
         }
         CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant) {
-            IconButton(onClick = { openDialog = true }) {
+            IconButton(
+                modifier = Modifier.clearAndSetSemantics { },
+                onClick = { openDialog = true }
+            ) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = stringResource(R.string.cd_show_fewer)
+                    contentDescription = showFewerLabel
                 )
             }
         }
